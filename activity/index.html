@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!--#include file="../include/meta.html" -->
+<title>活动_技术沙龙—RFsister射频技术服务平台</title>
+<meta name="keywords" content="射频公开课,公开课,技术沙龙" />
+<meta name="description" content="RFsister射频技术服务平台通过线上、线下渠道，邀请物联网、射频大咖进行经验分享包含不限于：测试实操、拆解剖析、案例解读、技术沙龙、研讨会等。" />
+<!--#include file="../include/style-script.html" -->
+</head>
+<body class="activityBg">
+<!--#include file="../include/header.html" -->
+<!--Fade Pic Start-->
+<div class="cmTopBanner">
+<div class="flexslider">
+	<ul class="slides">
+		<?php foreach ($this->ads as $ad): ?>
+		<li style="background:url({{$ad.url()}}) no-repeat center 0 / cover;"><a href="{{$ad.linkurl}}"></a></li>
+		<?php endforeach; ?>
+	</ul>
+</div>
+</div>
+<!--Fade Pic End-->
+
+<!--Content Start-->
+<div class="content contentv2 activityPage alls">
+  <div class="fixedCon2">
+  <div class="tbT cmHdmTit">
+    <a class="cur" href="javascript:;"><img src="../../images/blArb.png" />全部</a>
+	  <?php foreach ($this->categorys as $category): ?>
+	  <a  href="javascript:;"><img src="../../images/blArb.png" />{{$category.name}}</a>
+	  <?php endforeach; ?>
+	<!-- <a><img src="../../images/blArb.png" />公开课</a>
+	<a><img src="../../images/blArb.png" />技术沙龙</a>
+	<a><img src="../../images/blArb.png" />项目对接</a> -->
+  </div>
+  </div>
+  
+  <div class="tbC">
+    <div class="incs cmHdmCon" style="display:block">
+    <div class="cons list0">
+
+		<?php foreach ($this->activitys as $activity): ?>
+      <div class="mod">
+	    <a href="{{$activity.url()}}" class="img">
+		  <img src="{{$activity.logo('m')}}" />
+		</a>
+		<div class="trT">
+		  <div class="t1">
+		    <a href="{{$activity.url()}}" class="lt">{{$activity.title(36)}}</a>
+			<span class="tg">{{$activity.status()}}</span>
+		  </div>
+		  <span class="t2">{{$activity.summary(78)}}</span>
+		</div>
+	    <div class="trB">
+		  <span class="lt">{{str_replace('市','',$activity.city)}}</span>
+		  <span class="rt">{{$activity.stime('m月d日')}}</span>
+		</div>
+	  </div>
+	  <?php endforeach; ?>
+
+    </div>
+	<?php if($this->has_more): ?>
+	<div class="more">
+	  <a href="#" class="load_more" cid=0>查看更多</a>
+	</div>
+	<?php endif; ?>
+	</div>
+
+	<?php foreach ($this->categorys as $category): ?>
+	<?php $std = 'activitys'.$category->cid;  ?>
+    <div class="incs cmHdmCon" >
+    <div class="cons list{{$category->cid}}">
+
+		<?php foreach ($this->$std as $activity): ?>
+      <div class="mod">
+	    <a href="{{$activity.url()}}" class="img">
+		  <img src="{{$activity.logo('m')}}" />
+		</a>
+		<div class="trT">
+		  <div class="t1">
+		    <a href="{{$activity.url()}}" class="lt">{{$activity.title(36)}}</a>
+			<span class="tg2">{{$activity.status()}}</span>
+		  </div>
+		  <span class="t2">{{$activity.summary(78)}}</span>
+		</div>
+	    <div class="trB">
+		  <span class="lt">{{str_replace('市','',$activity.city)}}</span>
+		  <span class="rt">{{$activity.stime('m月d日')}}</span>
+		</div>
+	  </div>
+	  <?php endforeach; ?>
+
+    </div>
+	<?php $sname = 'has_more'.$category->cid ; ?>
+	<?php if($this->$sname): ?>
+	<div class="more">
+	  <a href="#" class="load_more" cid="{{$category->cid}}">查看更多</a>
+	</div>
+	<?php endif; ?>
+	</div>
+	<?php endforeach; ?>
+
+
+  </div>
+  
+  
+</div>
+<!--Content End-->
+
+<!--#include file="../include/footer.html" -->
+</body>
+</html>

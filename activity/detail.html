@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!--#include file="../include/meta.html" -->
+<title>{{$this.activity.title}}-RFsister</title>
+<!--#include file="../include/style-script.html" -->
+</head>
+<body>
+
+<!--#include file="../include/header.html" --> 
+
+<!--Content Start-->
+<div class="content activityDesPage">
+  <div class="topMd"> <a class="pic"><img src="{{$this.activity.photo()}}" /></a>
+    <div class="rits"> <span class="t1">{{$this.activity.title}}</span> <span class="t2"><?php echo $this->activity->stime('Y年m月d日 H:i') . ' ~ ' . $this->activity->etime('Y年m月d日 H:i'); ?></span> <span class="t3"><a><?php echo $this->activity->pcity; ?>&nbsp;<?php echo $this->activity->address; ?></a></span> <span class="t4">限额{{$this.activity.limit}}人</span> <span class="t5">主办方：{{$this.activity.sponsor}}</span> <span class="t5">联系人：{{$this.activity.mobile}}</span>
+      <div class="btr"> 
+		<?php if($this->is_exp): ?>
+		  <a class="lbt  cc" href="#" style="background-color:#ccc;"> 已结束 </a>
+		<?php elseif($this->is_apply): ?>
+		  <a class="lbt  cc" href="#" style="background-color:#ccc;"> 已报名 </a>
+		  <?php else: ?>
+		  <a class="lbt activity_apply"  aid="{{$this.activity.activity_id}}" ismobileauth="{{$this.is_mobile_auth}}">我要报名</a> 
+		  <?php endif; ?>
+	  <span class="nms"><i>{{$this.activity.hits}}人</i>浏览</span>
+        <div class="shs">
+          <div class="bdsharebuttonbox">
+          <a href="#" class="bds_more" data-cmd="more"></a>
+          <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+          <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+          <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+          <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+          <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+          </div>
+          <script>
+		  window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+		  </script> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="hidden" name="activity_id" id="activity_id" value="{{$this.activity.activity_id}}">
+  <div class="hdnrT"> <span>活动内容</span> </div>
+  <div class="atcCon"> {{$this.activity.content}} </div>
+  <div class="secTit">已报名（{{$this.applys.total()}}）</div>
+  <div class="ccCon">
+    <div class="con">
+      <?php if(!$this->applys->total()): ?>
+        <p style="text-align:center;padding-top:20px;">暂无记录</p>
+      <?php else: ?>
+		  <?php foreach ($this->applys as $apply): ?>
+		      <div class="mds"> <a class="imgs" href="../user/profile.html?uid={{$apply.user_id}}"> <img src="{{$apply.user.logo()}}"> </a> <span class="tt">{{$apply.user.dname}}</span> </div>
+		  <?php endforeach; ?>
+      <?php endif; ?>
+    </div>
+  </div>
+  <div class="secTit">有问题提出</div>
+	<form id="comment-form">
+	<div class="txs">
+	  <textarea name="content" placeholder="请登录后提问..."></textarea>
+	</div>
+	<div class="tls">
+	  <input type="button" class="btn submit" value="提问" />
+	</div>
+	</form>
+	
+  
+  <div class="qbpl">
+      <ul class="plList comment-list" itemid="{{$this.activity.activity_id}}" model="activity">
+      
+      </ul>
+  </div>
+</div>
+<!--Content End--> 
+
+<!--#include file="../include/footer.html" --> 
+
+</body>
+</html>
